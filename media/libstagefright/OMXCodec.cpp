@@ -203,6 +203,12 @@ static void InitOMXParams(T *params) {
 }
 
 static bool IsSoftwareCodec(const char *componentName) {
+#ifdef OMAP_ENHANCEMENT_DOLBY_DDPDEC51_MULTICHANNEL
+    if (!strncmp("OMX.dolby.", componentName, 10)) {
+        return true;
+    }
+#endif
+
     if (!strncmp("OMX.google.", componentName, 11)
         || !strncmp("OMX.PV.", componentName, 7)) {
         return true;
@@ -1760,6 +1766,12 @@ void OMXCodec::setComponentRole(
             "audio_decoder.eac3", NULL },
         { MEDIA_MIMETYPE_VIDEO_DIVX311,
             "video_decoder.divx", NULL },
+#endif
+#ifdef OMAP_ENHANCEMENT_DOLBY_DDPDEC51_MULTICHANNEL
+        { MEDIA_MIMETYPE_AUDIO_AC3,
+            "audio_decoder.ac3", "audio_encoder.ac3" },
+        { MEDIA_MIMETYPE_AUDIO_EC3,
+            "audio_decoder.ec3", "audio_encoder.ec3" },
 #endif
     };
 
@@ -4866,6 +4878,9 @@ static const char *audioCodingTypeString(OMX_AUDIO_CODINGTYPE type) {
         "OMX_AUDIO_CodingWMA",
         "OMX_AUDIO_CodingRA",
         "OMX_AUDIO_CodingMIDI",
+#ifdef OMAP_ENHANCEMENT_DOLBY_DDPDEC51_MULTICHANNEL
+        "OMX_AUDIO_CodingDDP",
+#endif
     };
 
     size_t numNames = sizeof(kNames) / sizeof(kNames[0]);

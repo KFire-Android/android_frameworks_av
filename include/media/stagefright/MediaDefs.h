@@ -79,6 +79,11 @@ extern const char *MEDIA_MIMETYPE_VIDEO_DIVX4;
 extern const char *MEDIA_MIMETYPE_VIDEO_WMV;
 #endif
 
+#ifdef OMAP_ENHANCEMENT_DOLBY_DDPDEC51_MULTICHANNEL
+extern const char *MEDIA_MIMETYPE_AUDIO_EC3;
+extern const char *MEDIA_MIMETYPE_AUDIO_AC3;
+#endif
+
 }  // namespace android
 
 #endif  // MEDIA_DEFS_H_
